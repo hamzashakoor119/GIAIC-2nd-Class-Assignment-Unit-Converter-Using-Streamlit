@@ -102,13 +102,12 @@
 
 
 
-
 import streamlit as st
 
 # Set up the page
 st.set_page_config(page_title="Unit Converter", page_icon="🔢", layout="wide")
 
-# CSS for professional UI/UX
+# CSS for professional UI/UX with dropdown pointer
 st.markdown("""
     <style>
         /* Main Title */
@@ -142,6 +141,11 @@ st.markdown("""
             font-weight: bold;
             color: #0056b3;
         }
+        /* Dropdown Styling */
+        div[data-baseweb="select"] > div {
+            cursor: pointer !important;
+        }
+        /* Footer */
         .footer {
             text-align: center;
             color: grey;
