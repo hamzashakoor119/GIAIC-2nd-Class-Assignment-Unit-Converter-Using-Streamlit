@@ -53,7 +53,7 @@ st.markdown("""
 
 # Header Section
 st.markdown("<div style='text-align: center; font-size: 60px; font-weight: bold; color: #007BFF;'>Code With Hamza 💻</div>", unsafe_allow_html=True)
-st.markdown("<div style='text-align: center; font-size: 30px; font-weight: bold; color: black;'>💡Advanced Unit Converter🔁</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 30px; font-weight: bold; color: black;'>📏📏Professional Unit Converter🔁</div>", unsafe_allow_html=True)
 
 # Converter Selection
 category = st.selectbox("Select a Category", list(conversion_factors.keys()))
