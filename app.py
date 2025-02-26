@@ -12,8 +12,8 @@ conversion_factors = {
         "Ounce": 0.0283495, "Pound": 0.453592
     },
     "Temperature": {
-        "Celsius": lambda c: c, 
-        "Fahrenheit": lambda f: (f - 32) * 5/9, 
+        "Celsius": lambda c: c,
+        "Fahrenheit": lambda f: (f - 32) * 5/9,
         "Kelvin": lambda k: k - 273.15
     },
     "Area": {
@@ -49,6 +49,22 @@ st.markdown("""
             padding: 15px;
             border-radius: 5px;
             margin: 10px;
+        }
+        .footer-text {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        .footer-created-by {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+        }
+        .footer-code-with-hamza {
+            color: #007BFF;
+        }
+        .selectbox-label, .stSelectbox {
+            cursor: pointer;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -110,11 +126,15 @@ with col2:
     """, unsafe_allow_html=True)
 
 # Footer & Community Links
-st.markdown("<div class='sub-header'>Created by Code With Hamza</div>", unsafe_allow_html=True)
+st.markdown("""
+    <div class='footer-created-by'>
+        📌Created by <span class='footer-code-with-hamza'>Code With Hamza💻</span>
+    </div>
+""", unsafe_allow_html=True)
 st.markdown("""
     <div class='description-box' style='text-align: center;'>
         <b>Join Our WhatsApp Community</b><br>
         <a href="https://chat.whatsapp.com/DsgyUPdnNEcLTkvQibJtGk" target="_blank">Community Link</a>
     </div>
 """, unsafe_allow_html=True)
-st.markdown("<div style='text-align: center; font-size: 14px; color: #666;'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
+st.markdown("<div class='footer-text'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
