@@ -1,68 +1,7 @@
 import streamlit as st
 
-# Configure the Streamlit page settings
-st.set_page_config(page_title="Unit Converter", page_icon="🔢", layout="wide")
+st.set_page_config(page_title="💡Advanced Unit Converter🔁", layout="centered")
 
-# Apply custom CSS for an enhanced UI experience
-st.markdown("""
-    <style>
-        /* Main Title Styling */
-        .title {
-            text-align: center;
-            color: #0056b3;
-            font-size: 42px;
-            font-weight: bold;
-            margin-bottom: -10px;
-        }
-        /* Subtitle Styling */
-        .subtitle {
-            text-align: center;
-            font-size: 20px;
-            color: #6c757d;
-            font-weight: 500;
-        }
-        /* Button Styling */
-        .stButton>button {
-            background-color: #007BFF;
-            color: white;
-            border-radius: 8px;
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        /* Sidebar Title Styling */
-        .sidebar-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #0056b3;
-        }
-        /* Dropdown Cursor Effect */
-        div[data-baseweb="select"] > div {
-            cursor: pointer !important;
-        }
-        /* Footer Styling */
-        .footer {
-            text-align: center;
-            color: grey;
-            font-size: 14px;
-            margin-top: 20px;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Page header
-st.markdown("<h1 class='title'>Code With Hamza 💻</h1>", unsafe_allow_html=True)
-st.markdown("<h2 class='subtitle'>A Professional Unit Converter</h2>", unsafe_allow_html=True)
-st.write("")
-
-# Sidebar settings
-st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/1/17/Streamlit-logo-primary-colormark-darktext.png", width=200)
-st.sidebar.markdown("<p class='sidebar-title'>⚙️ Settings</p>", unsafe_allow_html=True)
-st.sidebar.write("Adjust settings and select units.")
-st.sidebar.markdown("---")  # Adds a separator line for better UI
-
-# Dictionary containing conversion factors for different unit categories
 conversion_factors = {
     "Length": {
         "Millimeter": 0.001, "Centimeter": 0.01, "Meter": 1, "Kilometer": 1000,
@@ -90,33 +29,92 @@ conversion_factors = {
     }
 }
 
-# User selects the unit category they want to convert
-category = st.selectbox("📌 Select a Category", list(conversion_factors.keys()))
+st.markdown("""
+    <style>
+        .header-title {
+            text-align: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .sub-header {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: black;
+        }
+        .description-box {
+            background-color: #eef5ff;
+            border-left: 5px solid #007BFF;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-# Get the list of units available for the selected category
+# Header
+st.markdown("<div class='header-title'>Code With Hamza 💻</div>", unsafe_allow_html=True)
+st.markdown("<div class='sub-header'>💡Advanced Unit Converter🔁</div>", unsafe_allow_html=True)
+
+# Converter Selection
+category = st.selectbox("Select a Category", list(conversion_factors.keys()))
 unit_options = list(conversion_factors[category].keys())
+input_value = st.number_input("Enter Value", value=1.0)
+col1, col2, col3 = st.columns([2, 1, 2])
 
-# User selects input and output units
-input_unit = st.selectbox("🛠 Select Input Unit", unit_options)
-output_unit = st.selectbox("🎯 Select Output Unit", unit_options)
+with col1:
+    input_unit = st.selectbox("From", unit_options)
+with col3:
+    output_unit = st.selectbox("To", unit_options)
 
-# User inputs the numerical value they want to convert
-value = st.number_input("🔢 Enter Value", value=0.0, step=0.1)
-
-# Perform conversion when the user clicks the "Convert" button
-if st.button("🚀 Convert"):
+if st.button("Convert"):
     input_conversion = conversion_factors[category][input_unit]
     output_conversion = conversion_factors[category][output_unit]
 
-    # Special handling for temperature conversion (using functions)
     if callable(input_conversion):
-        result = output_conversion(input_conversion(value))
+        result = output_conversion(input_conversion(input_value))
     else:
-        result = (value * input_conversion) / output_conversion
+        result = (input_value * input_conversion) / output_conversion
 
-    # Display the conversion result
-    st.success(f"✅ {value} {input_unit} = {result:.4f} {output_unit}")
+    st.markdown(f"<b>{input_value}</b> {input_unit} = <b>{result:.4f}</b> {output_unit}", unsafe_allow_html=True)
 
-# Footer
-st.markdown("---")
-st.markdown("<p class='footer'>📌 Created By <b style='color:#0056b3;'>Code With Hamza 💻</b> using Streamlit</p>", unsafe_allow_html=True)
+# Description Section with 2 columns
+st.markdown("<h3>Available Unit Conversions</h3>", unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+        <div class='description-box'>
+            <b>Length:</b> Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles.
+        </div>
+        <div class='description-box'>
+            <b>Temperature:</b> Convert between Celsius, Fahrenheit, and Kelvin.
+        </div>
+        <div class='description-box'>
+            <b>Volume:</b> Convert between milliliters, liters, cubic meters, cubic inches, cubic feet, and gallons.
+        </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+        <div class='description-box'>
+            <b>Weight:</b> Convert between milligrams, grams, kilograms, tons, ounces, and pounds.
+        </div>
+        <div class='description-box'>
+            <b>Area:</b> Convert between square meters, square kilometers, hectares, square feet, square yards, and acres.
+        </div>
+        <div class='description-box'>
+            <b>Time:</b> Convert between seconds, minutes, hours, days, and weeks.
+        </div>
+    """, unsafe_allow_html=True)
+
+# Footer & Community Links
+st.markdown("<div class='sub-header'>Created by Code With Hamza</div>", unsafe_allow_html=True)
+st.markdown("""
+    <div class='description-box' style='text-align: center;'>
+        <b>Join Our WhatsApp Community</b><br>
+        <a href="https://chat.whatsapp.com/DsgyUPdnNEcLTkvQibJtGk" target="_blank">Community Link</a>
+    </div>
+""", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 14px; color: #666;'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
