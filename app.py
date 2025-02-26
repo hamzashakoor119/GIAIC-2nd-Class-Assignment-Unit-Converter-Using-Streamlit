@@ -1,7 +1,9 @@
 import streamlit as st
 
+# Page Config
 st.set_page_config(page_title="💡Advanced Unit Converter🔁", layout="centered")
 
+# Conversion Factors Dictionary
 conversion_factors = {
     "Length": {
         "Millimeter": 0.001, "Centimeter": 0.01, "Meter": 1, "Kilometer": 1000,
@@ -29,54 +31,35 @@ conversion_factors = {
     }
 }
 
+# Custom CSS for Button Hover Effect
 st.markdown("""
     <style>
-        .header-title {
-            text-align: center;
-            font-size: 60px;
+        div.stButton > button {
+            background-color: #007BFF;  /* Default blue */
+            color: white;
+            font-size: 18px;
             font-weight: bold;
-            color: #007BFF;
-        }
-        .sub-header {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            color: black;
-        }
-        .description-box {
-            background-color: #eef5ff;
-            border-left: 5px solid #007BFF;
-            padding: 15px;
+            padding: 10px 20px;
             border-radius: 5px;
-            margin: 10px;
+            transition: all 0.3s ease-in-out;
         }
-        .footer-text {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        .footer-created-by {
-            text-align: center;
-            font-size: 20px;
-            color: #666;
-        }
-        .footer-code-with-hamza {
-            color: #007BFF;
-        }
-        .selectbox-label, .stSelectbox {
-            cursor: pointer;
+        div.stButton > button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-3px); /* Moves button up */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds slight shadow */
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Header
-st.markdown("<div class='header-title'>Code With Hamza 💻</div>", unsafe_allow_html=True)
-st.markdown("<div class='sub-header'>💡Advanced Unit Converter🔁</div>", unsafe_allow_html=True)
+# Header Section
+st.markdown("<div style='text-align: center; font-size: 60px; font-weight: bold; color: #007BFF;'>Code With Hamza 💻</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 30px; font-weight: bold; color: black;'>💡Advanced Unit Converter🔁</div>", unsafe_allow_html=True)
 
 # Converter Selection
 category = st.selectbox("Select a Category", list(conversion_factors.keys()))
 unit_options = list(conversion_factors[category].keys())
 input_value = st.number_input("Enter Value", value=1.0)
+
 col1, col2, col3 = st.columns([2, 1, 2])
 
 with col1:
@@ -84,6 +67,7 @@ with col1:
 with col3:
     output_unit = st.selectbox("To", unit_options)
 
+# Convert Button
 if st.button("Convert"):
     input_conversion = conversion_factors[category][input_unit]
     output_conversion = conversion_factors[category][output_unit]
@@ -95,46 +79,48 @@ if st.button("Convert"):
 
     st.markdown(f"<b>{input_value}</b> {input_unit} = <b>{result:.4f}</b> {output_unit}", unsafe_allow_html=True)
 
-# Description Section with 2 columns
+# Description Section with Columns
 st.markdown("<h3>Available Unit Conversions</h3>", unsafe_allow_html=True)
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("""
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Length:</b> Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles.
         </div>
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Temperature:</b> Convert between Celsius, Fahrenheit, and Kelvin.
         </div>
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Volume:</b> Convert between milliliters, liters, cubic meters, cubic inches, cubic feet, and gallons.
         </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Weight:</b> Convert between milligrams, grams, kilograms, tons, ounces, and pounds.
         </div>
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Area:</b> Convert between square meters, square kilometers, hectares, square feet, square yards, and acres.
         </div>
-        <div class='description-box'>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
             <b>Time:</b> Convert between seconds, minutes, hours, days, and weeks.
         </div>
     """, unsafe_allow_html=True)
 
-# Footer & Community Links
+# Footer Section
 st.markdown("""
-    <div class='footer-created-by'>
-        📌Created by <span class='footer-code-with-hamza'>Code With Hamza💻</span>
+    <div style='text-align: center; font-size: 20px; color: #666;'>
+        📌Created by <span style='color: #007BFF;'>Code With Hamza💻</span>
     </div>
 """, unsafe_allow_html=True)
+
 st.markdown("""
-    <div class='description-box' style='text-align: center;'>
+    <div style='background-color: #eef5ff; text-align: center; padding: 15px; border-radius: 5px; margin: 10px;'>
         <b>Join Our WhatsApp Community</b><br>
         <a href="https://chat.whatsapp.com/DsgyUPdnNEcLTkvQibJtGk" target="_blank">Community Link</a>
     </div>
 """, unsafe_allow_html=True)
-st.markdown("<div class='footer-text'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
+
+st.markdown("<div style='text-align: center; font-size: 14px; color: #666;'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
