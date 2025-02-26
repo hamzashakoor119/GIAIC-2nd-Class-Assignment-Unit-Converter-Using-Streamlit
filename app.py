@@ -1,7 +1,7 @@
 import streamlit as st
 
-# Page Config with Wide Layout for Better Responsiveness
-st.set_page_config(page_title="📏📏Professional Unit Converter🔁", layout="wide")
+# Page Config
+st.set_page_config(page_title="📏📏Professional Unit Converter🔁", layout="centered")
 
 # Conversion Factors Dictionary
 conversion_factors = {
@@ -31,20 +31,11 @@ conversion_factors = {
     }
 }
 
-# Custom CSS for Responsive UI
+# Custom CSS for Button Hover Effect
 st.markdown("""
     <style>
-        @media screen and (max-width: 768px) {
-            div.stButton > button {
-                font-size: 14px !important;
-                padding: 8px 16px !important;
-            }
-            div.stSelectbox, div.stNumberInput input {
-                font-size: 14px !important;
-            }
-        }
         div.stButton > button {
-            background-color: #007BFF; 
+            background-color: #007BFF;  /* Default blue */
             color: white;
             font-size: 18px;
             font-weight: bold;
@@ -53,23 +44,22 @@ st.markdown("""
             transition: all 0.3s ease-in-out;
         }
         div.stButton > button:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-3px); /* Moves button up */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds slight shadow */
         }
     </style>
 """, unsafe_allow_html=True)
 
 # Header Section
-st.markdown("<h1 style='text-align: center; color: #007BFF;'>Code With Hamza 💻</h1>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center;'>📏📏Professional Unit Converter🔁</h2>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 60px; font-weight: bold; color: #007BFF;'>Code With Hamza 💻</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 30px; font-weight: bold; color: black;'>📏📏Professional Unit Converter🔁</div>", unsafe_allow_html=True)
 
 # Converter Selection
 category = st.selectbox("Select a Category", list(conversion_factors.keys()))
 unit_options = list(conversion_factors[category].keys())
 input_value = st.number_input("Enter Value", value=1.0)
 
-# Responsive Layout for Inputs
 col1, col2, col3 = st.columns([2, 1, 2])
 
 with col1:
@@ -89,30 +79,48 @@ if st.button("Convert"):
 
     st.markdown(f"<b>{input_value}</b> {input_unit} = <b>{result:.4f}</b> {output_unit}", unsafe_allow_html=True)
 
-# Available Conversions - Collapsible for Mobile
-with st.expander("ℹ️ Available Unit Conversions"):
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-            - **Length**: Millimeter, Centimeter, Meter, Kilometer, Inch, Foot, Yard, Mile.
-            - **Temperature**: Celsius, Fahrenheit, Kelvin.
-            - **Volume**: Milliliter, Liter, Cubic Meter, Cubic Inch, Cubic Foot, Gallon.
-        """)
-    with col2:
-        st.markdown("""
-            - **Weight**: Milligram, Gram, Kilogram, Ton, Ounce, Pound.
-            - **Area**: Square Meter, Square Kilometer, Hectare, Square Foot, Square Yard, Acre.
-            - **Time**: Second, Minute, Hour, Day, Week.
-        """)
+# Description Section with Columns
+st.markdown("<h3>Available Unit Conversions</h3>", unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Length:</b> Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, and miles.
+        </div>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Temperature:</b> Convert between Celsius, Fahrenheit, and Kelvin.
+        </div>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Volume:</b> Convert between milliliters, liters, cubic meters, cubic inches, cubic feet, and gallons.
+        </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Weight:</b> Convert between milligrams, grams, kilograms, tons, ounces, and pounds.
+        </div>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Area:</b> Convert between square meters, square kilometers, hectares, square feet, square yards, and acres.
+        </div>
+        <div style='background-color: #eef5ff; border-left: 5px solid #007BFF; padding: 15px; border-radius: 5px; margin: 10px;'>
+            <b>Time:</b> Convert between seconds, minutes, hours, days, and weeks.
+        </div>
+    """, unsafe_allow_html=True)
 
 # Footer Section
 st.markdown("""
     <div style='text-align: center; font-size: 20px; color: #666;'>
         📌Created by <span style='color: #007BFF;'>Code With Hamza💻</span>
     </div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
     <div style='background-color: #eef5ff; text-align: center; padding: 15px; border-radius: 5px; margin: 10px;'>
         <b>Join Our WhatsApp Community</b><br>
         <a href="https://chat.whatsapp.com/DsgyUPdnNEcLTkvQibJtGk" target="_blank">Community Link</a>
     </div>
-    <div style='text-align: center; font-size: 14px; color: #666;'>All rights reserved. © 2025 Hamza Shakoor</div>
 """, unsafe_allow_html=True)
+
+st.markdown("<div style='text-align: center; font-size: 14px; color: #666;'>All rights reserved. © 2025 Hamza Shakoor</div>", unsafe_allow_html=True)
