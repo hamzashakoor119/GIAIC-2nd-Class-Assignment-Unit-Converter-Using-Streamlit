@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Page Config
-st.set_page_config(page_title="💡Advanced Unit Converter🔁", layout="centered")
+st.set_page_config(page_title="📏📏Professional Unit Converter🔁", layout="centered")
 
 # Conversion Factors Dictionary
 conversion_factors = {
